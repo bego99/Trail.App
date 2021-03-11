@@ -3,11 +3,12 @@ package com.example.se2_trail;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
 
 
@@ -25,5 +26,9 @@ public class MainActivity extends AppCompatActivity {
         inputNumber = (EditText)findViewById(R.id.editTextNumber);
         txtViewEingabeMatrikelNr = (TextView)findViewById(R.id.textView);
         txtViewAntwort = (TextView)findViewById((R.id.textView2));
+        sendButton.setOnClickListener(XXX);
+
+
+
     }
 }
