@@ -13,10 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -46,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         //Define activity Main Objjects
         sendButton = (Button) findViewById(R.id.button);
@@ -90,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected String doInBackground(String... params) { //keinen Zugriff auf UI muss async parameter 1 ist
 
 
-
             message = params[0];
             String serverResponds = null;
             try {
@@ -102,14 +97,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 serverResponds = bufferedReader.readLine();
                 socket.close();
 
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return serverResponds;
-
-
-
         }
         @Override
         protected void onPostExecute(String serverResponds){
@@ -117,14 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             txtViewAntwort.setText(serverResponds);
             txtViewAntwort.setVisibility(View.VISIBLE);
-
-
-
         }
-
-
-
-
     }
 
 
@@ -158,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // obtaining number from input
             String sortMat = inputNumber.getText().toString();
             // creating String array to convert it to int Array
+            // geht auch mit charAt(i)
             String[] sortmatNrArray = sortMat.split("");
             Log.d("lenght", String.valueOf(sortmatNrArray.length));
 
