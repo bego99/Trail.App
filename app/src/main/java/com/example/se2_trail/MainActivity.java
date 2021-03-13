@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button sendButton;
     Button berechnungButton;
+    Button clearSendButton;
+
     EditText inputNumber;
     TextView txtViewEingabeMatrikelNr;
     TextView txtViewAntwort;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Define activity Main Objjects
         sendButton = (Button) findViewById(R.id.button);
+
+        clearSendButton = (Button)findViewById(R.id.button5);
         berechnungButton = (Button) findViewById(R.id.button2);
         inputNumber = (EditText) findViewById(R.id.editTextNumber);
         txtViewEingabeMatrikelNr = (TextView) findViewById(R.id.textView);
@@ -53,9 +57,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtViewMatNr = (TextView) findViewById(R.id.textView4);
         txtViewErrorMessage = (TextView) findViewById(R.id.textView3);
 
-        // set invisible txtViewAntwort und MatNr.
+        // set invisible
         txtViewMatNr.setVisibility(View.INVISIBLE);
         txtViewAntwort.setVisibility(View.INVISIBLE);
+        clearSendButton.setVisibility(View.INVISIBLE);
+
 
         //Error Message nicht anzeigen;
         txtViewErrorMessage.setText("");
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sendButton.setOnClickListener(this::onClick);
         // sort MatNr
         berechnungButton.setOnClickListener(this::onClick2);
+
+        clearSendButton.setOnClickListener(this::onClickClearSendButtons);
 
     }
 
@@ -108,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             txtViewAntwort.setText(serverResponds);
             txtViewAntwort.setVisibility(View.VISIBLE);
+            sendButton.setVisibility(View.INVISIBLE);
+            clearSendButton.setVisibility(View.VISIBLE);
         }
     }
 
@@ -120,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // Safe input MatNr
             matNr = inputNumber.getText().toString();
+            txtViewErrorMessage.setText("");
 
             if (matNr.length() == 8) {
 
@@ -134,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             } else {
                 txtViewErrorMessage.setText("Bitte geben Sie eine Oesterreichische Matrikelnummer ein");
+                inputNumber.getText().clear();
             }
         }
 
@@ -148,10 +160,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (sortmatNrArray.length == 8) {
                 txtViewErrorMessage.setText("");
+                sendButton.setVisibility(View.INVISIBLE);
+                clearSendButton.setVisibility(View.VISIBLE);
                 txtViewMatNr.setVisibility(View.VISIBLE);
                 txtViewMatNr.setText("Deine Matrikel Nummer lautet: " + sortMat);
                 String sorted = changeEverySecondNumber(sortmatNrArray);
                 inputNumber.setText(sorted);
+
             } else {
                 txtViewErrorMessage.setText("Eine Oesterreichische Matrikelnummer hat 8 Ziffern");
                 inputNumber.getText().clear();
@@ -176,4 +191,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Log.d("string", resultMatNr);
             return resultMatNr;
         }
+
+
+        public void onClickClearSendButtons(View v){
+        sendButton.setVisibility(View.VISIBLE);
+        clearSendButton.setVisibility(View.INVISIBLE);
+        txtViewMatNr.setText("");
+        txtViewAntwort.setText("");
+        inputNumber.setText("");
+        }
+
+
+
+
+
     }
